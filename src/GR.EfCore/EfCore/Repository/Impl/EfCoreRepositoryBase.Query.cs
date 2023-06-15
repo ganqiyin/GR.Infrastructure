@@ -4,6 +4,8 @@ using System.Linq.Expressions;
 namespace GR.EfCore.Repository.Impl
 {
     public partial class EfCoreRepositoryBase<TDbContext, TEntity>
+        where TEntity : class
+        where TDbContext : DbContext
     {
         public IQueryable<TEntity> Query() => Table.AsQueryable();
 
