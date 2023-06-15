@@ -5,6 +5,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<RootNamespace>GR.Autofac</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<RepositoryUrl>https://github.com/ganqiyin/GR.Infrastructure</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
