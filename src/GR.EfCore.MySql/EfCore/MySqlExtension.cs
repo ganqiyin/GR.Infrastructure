@@ -36,7 +36,7 @@ namespace GR.EfCore
         public static IServiceCollection AddMySql<TDbContext>(this IServiceCollection services, string connStr, string dbVer = "8.0", AddDbContextModeType modeType = AddDbContextModeType.AddDbContextPool)
          where TDbContext : DbContext
         {
-            services.AddEfCore();
+            services.AddEfCore<TDbContext>();
             var serverVer = new MySqlServerVersion(dbVer);
             switch (modeType)
             {

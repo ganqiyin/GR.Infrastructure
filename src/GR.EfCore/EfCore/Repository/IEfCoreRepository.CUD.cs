@@ -14,69 +14,43 @@ namespace GR.EfCore.Repository
         /// <summary>
         /// 新增
         /// </summary>
-        int Insert(TEntity entity);
+        void Insert(TEntity entity);
 
         /// <summary>
         /// 新增
         /// </summary>
-        Task<int> InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
+        Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 批量新增
         /// </summary>
-        int Insert(IEnumerable<TEntity> entities);
+        void Insert(IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 批量新增
         /// </summary>
-        Task<int> InsertAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+        Task InsertAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 更新
         /// </summary>
-        int Update(TEntity entity);
-
-        /// <summary>
-        /// 更新
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <returns></returns>
-        int Update(IEnumerable<TEntity> entities);
-
-        /// <summary>
-        /// 更新
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        Task<int> UpdateAsync(TEntity entity);
+        void Update(TEntity entity);
 
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        Task<int> UpdateAsync(IEnumerable<TEntity> entities);
+        void Update(IEnumerable<TEntity> entities);
 
         /// <summary>
         /// 根据传入的实体删除
         /// </summary>
-        int Delete(TEntity entity);
+        void Delete(TEntity entity);
 
         /// <summary>
         /// 根据传入的实体删除
         /// </summary>
-        int Delete(IEnumerable<TEntity> entities);
-
-        /// <summary>
-        /// 根据传入的实体删除
-        /// </summary>
-        Task<int> DeleteAsync(TEntity entity);
-
-        /// <summary>
-        /// 根据传入的实体删除
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <returns></returns>
-        Task<int> DeleteAsync(IEnumerable<TEntity> entities);
+        void Delete(IEnumerable<TEntity> entities);
     }
 }

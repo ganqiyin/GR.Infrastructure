@@ -2,13 +2,16 @@
 
 namespace GR.EfCore.UoW
 {
-    public interface IUnitOfWork<TDbContext> where TDbContext : DbContext
+    public interface IUnitOfWork<TDbContext> : IUnitOfWork where TDbContext : DbContext
     {
         /// <summary>
         /// 数据库上下文
         /// </summary>
         TDbContext DbContext { get; }
+    }
 
+    public interface IUnitOfWork
+    {
         /// <summary>
         /// 提交
         /// </summary>

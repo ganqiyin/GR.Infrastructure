@@ -12,11 +12,19 @@ namespace GR.EfCore.Tests
         }
 
         [Fact]
-        public async Task AddTest()
+        public async Task GetByIdTest()
         {
-            var count = await _userRepo.InsertAsync(new Domain.User { Id = 1, Name = "test", Password = "123456" });
-            Assert.True(count > 0);
-            Assert.Equal(1, count);
+            var user = await _userRepo.GetAsync(1);
+            Assert.NotNull(user);
+            Assert.Equal(1, user.Id);
+        }
+
+
+        [Fact]
+        public async Task GetAllTest()
+        {
+            var users = await _userRepo.GetAllAsync();
+            Assert.NotNull(users);
         }
     }
 }

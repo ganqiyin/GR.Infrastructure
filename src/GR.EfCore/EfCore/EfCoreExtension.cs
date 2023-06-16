@@ -1,5 +1,6 @@
 ﻿using GR.EfCore.Repository;
 using GR.EfCore.Repository.Impl;
+using GR.EfCore.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -11,10 +12,13 @@ namespace GR.EfCore
     /// </summary>
     public static partial class Extension
     {
-        public static IServiceCollection AddEfCore(this IServiceCollection services)
+        public static IServiceCollection AddEfCore<TDbContext>(this IServiceCollection services)
+            where TDbContext : DbContext
         {
             //
             services.AddScoped(typeof(IEfCoreRepository<,>), typeof(EfCoreRepositoryBase<,>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork<TDbContext>));
+            services.AddScoped(typeof(IUnitOfWork<TDbContext>), typeof(UnitOfWork<TDbContext>));
             //
             return services;
         }

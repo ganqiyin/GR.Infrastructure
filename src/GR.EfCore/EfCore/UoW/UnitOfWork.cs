@@ -2,7 +2,7 @@
 
 namespace GR.EfCore.UoW
 {
-    public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
+    public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>, IUnitOfWork
         where TDbContext : DbContext
     {
         private readonly TDbContext _dbContext;
