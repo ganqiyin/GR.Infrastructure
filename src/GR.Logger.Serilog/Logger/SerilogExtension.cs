@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Serilog;
+﻿using Serilog;
 
 namespace GR.Logger
 {
@@ -12,21 +11,10 @@ namespace GR.Logger
         /// 创建日志提供器
         /// </summary>
         /// <param name="loggerConfig"></param>
-        /// <param name="isReadConfig"></param>
         /// <param name="serilogOutputTemplate"></param>
         /// <returns></returns>
-        public static Serilog.Core.Logger Logger(this LoggerConfiguration loggerConfig, bool isReadConfig = false, string serilogOutputTemplate = "")
+        public static Serilog.Core.Logger InitLogger(this LoggerConfiguration loggerConfig, string serilogOutputTemplate = "")
         {
-            if (isReadConfig)
-            {
-                var config = new ConfigurationBuilder()
-                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                    .AddJsonFile("appsettings.json", true, true)
-                    .AddJsonFile("appsettings.Development.json", true, true).Build();
-                loggerConfig = loggerConfig.ReadFrom.Configuration(config);
-            }
-            else
-            {
                 serilogOutputTemplate = string.IsNullOrEmpty(serilogOutputTemplate) ? "{NewLine}{NewLine}Date：{Timestamp:yyyy-MM-dd HH:mm:ss.fff}{NewLine}LogLevel：{Level}{NewLine}Message：{Message}{NewLine}{Exception}" + new string('-', 100) : serilogOutputTemplate;
 
                 var logPath = Path.Combine(AppContext.BaseDirectory, "Logs", "log_.log");
@@ -57,7 +45,6 @@ namespace GR.Logger
                                   , retainedFileCountLimit: 31
                                   )
                      );
-            }
             return loggerConfig.CreateLogger();
         }
     }
