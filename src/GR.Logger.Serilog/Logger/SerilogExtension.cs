@@ -5,6 +5,9 @@ namespace GR.Logger
     /// <summary>
     /// 扩展
     /// </summary>
+    /// <remarks>
+    /// https://www.cnblogs.com/xiyuanMore/p/15106494.html
+    /// </remarks>
     public static class SerilogExtension
     {
         /// <summary>
