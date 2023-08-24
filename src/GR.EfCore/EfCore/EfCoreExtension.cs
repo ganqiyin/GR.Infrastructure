@@ -1,5 +1,4 @@
 ﻿using GR.EfCore.Repository;
-using GR.EfCore.Repository.Impl;
 using GR.EfCore.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +15,8 @@ namespace GR.EfCore
             where TDbContext : DbContext
         {
             //
-            services.AddScoped(typeof(IEfCoreRepository<,>), typeof(EfCoreRepositoryBase<,>));
+            services.AddScoped(typeof(IEfCoreRepository<,>), typeof(EfCoreRepository<,>));
+            services.AddScoped(typeof(IEfCoreRepository<,,>), typeof(EfCoreRepository<,,>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork<TDbContext>));
             services.AddScoped(typeof(IUnitOfWork<TDbContext>), typeof(UnitOfWork<TDbContext>));
             //

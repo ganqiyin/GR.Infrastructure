@@ -1,13 +1,76 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GR.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace GR.EfCore.Repository
 {
+    /// <summary>
+    /// 仓储
+    /// </summary>
+    /// <remarks>
+    /// 参考文档：
+    /// https://cloud.tencent.com/developer/article/1505237?from=15425
+    /// 
+    /// </remarks>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TDbContext"></typeparam>
+    public interface IEfCoreRepository<TEntity, TDbContext> : IEfCoreRepository<TEntity, long, TDbContext>
+        where TEntity : class, IEntity, IAggregateRoot
+        where TDbContext : DbContext, new()
+    { }
 
-    public partial interface IEfCoreRepository<TDbContext, TEntity>
-        where TEntity : class
-        where TDbContext : DbContext
+    /// <summary>
+    /// 仓储
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TDbContext"></typeparam>
+    public interface IEfCoreRepository<TEntity, TKey, TDbContext>
+        where TEntity : class, IEntity<TKey>, IAggregateRoot<TKey>
+        where TDbContext : DbContext, new()
     {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        void Insert(TEntity entity);
+
+        /// <summary>
+        /// 新增
+        /// </summary>
+        Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 批量新增
+        /// </summary>
+        void Insert(IEnumerable<TEntity> entities);
+
+        /// <summary>
+        /// 批量新增
+        /// </summary>
+        Task InsertAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        void Update(TEntity entity);
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        void Update(IEnumerable<TEntity> entities);
+
+        /// <summary>
+        /// 根据传入的实体删除
+        /// </summary>
+        void Delete(TEntity entity);
+
+        /// <summary>
+        /// 根据传入的实体删除
+        /// </summary>
+        void Delete(IEnumerable<TEntity> entities);
+
         /// <summary>
         /// 查询
         /// </summary>
