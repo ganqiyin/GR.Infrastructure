@@ -13,15 +13,19 @@ namespace GR.EfCore
         /// 注册
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="config"></param> 
+        /// <param name="configuration"></param> 
+        /// <param name="connectionName"></param>
         /// <param name="modeType">注册方式<see cref="AddDbContextModeType"/></param> 
+        /// <param name="factoryLifetime">
+        /// 使用AddDbContextFactory 方法注入的生命周期类型：默认是单例，如果要实现多个请求并发则需要使用 ServiceLifetime.Scoped
+        /// </param>
         /// <returns></returns>
-        public static IServiceCollection AddMySql<TDbContext>(this IServiceCollection services, IConfiguration config, AddDbContextModeType modeType = AddDbContextModeType.AddDbContextPool)
+        public static IServiceCollection AddMySql<TDbContext>(this IServiceCollection services, IConfiguration configuration, string connectionName= "Default", AddDbContextModeType modeType = AddDbContextModeType.AddDbContextPool, ServiceLifetime factoryLifetime = ServiceLifetime.Singleton)
          where TDbContext : DbContext
         {
-            var connStr = config.GetConnectionString("Default");
-            var dbVer = config.GetSection("MySql:Ver").Value;
-            services.AddMySql<TDbContext>(connStr, dbVer: dbVer, modeType: modeType);
+            var connStr = configuration.GetConnectionString(connectionName);
+            var dbVer = configuration.GetSection("MySql:Ver").Value ?? "8.0";
+            services.AddMySql<TDbContext>(connStr, dbVer: dbVer, modeType: modeType, factoryLifetime: factoryLifetime);
             return services;
         }
 
