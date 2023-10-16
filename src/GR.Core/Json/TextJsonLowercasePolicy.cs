@@ -5,7 +5,7 @@ namespace GR.Json
     /// <summary>
     /// 转小写
     /// </summary>
-    public class LowercasePolicy : JsonNamingPolicy
+    public class TextJsonLowercasePolicy : JsonNamingPolicy
     {
         public override string ConvertName(string name)
         {

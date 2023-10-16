@@ -62,7 +62,7 @@ namespace GR.Extensions
             if (isToLower)
             { 
                 //配置 小写 格式，而不是默认的 camelCase 格式
-                options.PropertyNamingPolicy = new LowercasePolicy();
+                options.PropertyNamingPolicy = new TextJsonLowercasePolicy();
             }
             return JsonSerializer.Serialize(result, options: options);
         }
